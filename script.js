@@ -1,46 +1,56 @@
-// Seleção dos elementos do DOM
-const botao = document.getElementById("btnCalcular");
-const inputPreco = document.getElementById("preco");
-const inputDesconto = document.getElementById("desconto");
-const painelResultado = document.getElementById("resultado");
+// Pega os elementos do HTML
+let campo1 = document.getElementById("numero1");
+let campo2 = document.getElementById("numero2");
+let btnSomar = document.getElementById("btnSomar");
+let btnSubtrair = document.getElementById("btnSubtrair");
+let btnMultiplicar = document.getElementById("btnMultiplicar");
+let textoResultado = document.getElementById("resultado");
 
-// Função principal de validação e cálculo
-function calcularDesconto() {
-  // Variáveis para leitura dos valores
-  const valorOriginal = parseFloat(inputPreco.value);
-  const percentualDesconto = parseFloat(inputDesconto.value);
+// Função para validar os campos
+function validarCampos() {
+  let num1 = parseFloat(campo1.value);
+  let num2 = parseFloat(campo2.value);
 
-  // Validação dos dados de entrada
-  if (isNaN(valorOriginal) || isNaN(percentualDesconto)) {
-    painelResultado.className = "painel-resultado erro";
-    painelResultado.textContent = "Por favor, preencha todos os campos com números válidos.";
-    return;
+  if (isNaN(num1) || isNaN(num2)) {
+    textoResultado.innerText = "Por favor, preencha os dois números!";
+    textoResultado.style.color = "red";
+    return null;
   }
 
-  if (valorOriginal <= 0) {
-    painelResultado.className = "painel-resultado erro";
-    painelResultado.textContent = "O preço deve ser maior que zero.";
-    return;
-  }
-
-  if (percentualDesconto < 0 || percentualDesconto > 100) {
-    painelResultado.className = "painel-resultado erro";
-    painelResultado.textContent = "O desconto deve situar-se entre 0% e 100%.";
-    return;
-  }
-
-  // Cálculo dos valores
-  const totalDesconto = (valorOriginal * percentualDesconto) / 100;
-  const valorFinal = valorOriginal - totalDesconto;
-
-  // Atualização dinâmica do conteúdo na página
-  painelResultado.className = "painel-resultado sucesso";
-  painelResultado.innerHTML = `
-    <strong>Cálculo Realizado com Sucesso:</strong><br>
-    Desconto aplicado: <strong>${percentualDesconto}%</strong> (-${totalDesconto.toFixed(2)})<br>
-    Preço a pagar: <strong>${valorFinal.toFixed(2)}</strong>
-  `;
+  return { num1, num2 };
 }
 
-// Vinculação do evento de clique ao botão
-botao.addEventListener("click", calcularDesconto);
+// Função para somar
+function somar() {
+  const valores = validarCampos();
+  if (!valores) return;
+
+  let total = valores.num1 + valores.num2;
+  textoResultado.innerText = "Resultado: " + total;
+  textoResultado.style.color = "#28a745";
+}
+
+// Função para subtrair
+function subtrair() {
+  const valores = validarCampos();
+  if (!valores) return;
+
+  let total = valores.num1 - valores.num2;
+  textoResultado.innerText = "Resultado: " + total;
+  textoResultado.style.color = "#dc3545";
+}
+
+// Função para multiplicar
+function multiplicar() {
+  const valores = validarCampos();
+  if (!valores) return;
+
+  let total = valores.num1 * valores.num2;
+  textoResultado.innerText = "Resultado: " + total;
+  textoResultado.style.color = "#007bff";
+}
+
+// Escuta os cliques nos botões
+btnSomar.addEventListener("click", somar);
+btnSubtrair.addEventListener("click", subtrair);
+btnMultiplicar.addEventListener("click", multiplicar);
