@@ -1,35 +1,34 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculadora de Descontos</title>
+  <title>Calculadora Simples</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <main class="container">
-    <h2>Calculadora de Desconto</h2>
-    <p class="descricao">Insira o valor do produto e a percentagem de desconto para calcular o total.</p>
+  <div class="box">
+    <h2>Calculadora</h2>
 
-    <form id="formCalculo" onsubmit="event.preventDefault();">
-      <div class="campo">
-        <label for="preco">Preço Original (€ / R$):</label>
-        <input type="number" id="preco" placeholder="Ex: 100.00" step="0.01" min="0" required>
-      </div>
-
-      <div class="campo">
-        <label for="desconto">Desconto (%):</label>
-        <input type="number" id="desconto" placeholder="Ex: 15" step="1" min="0" max="100" required>
-      </div>
-
-      <button type="button" id="btnCalcular">Calcular Valor Final</button>
-    </form>
-
-    <div id="resultado" class="painel-resultado">
-      O resultado aparecerá aqui após o cálculo.
+    <div class="campo">
+      <label for="numero1">Primeiro número:</label>
+      <input type="number" id="numero1" placeholder="Digite um valor">
     </div>
-  </main>
+
+    <div class="campo">
+      <label for="numero2">Segundo número:</label>
+      <input type="number" id="numero2" placeholder="Digite outro valor">
+    </div>
+
+    <div class="botoes">
+      <button id="btnSomar" class="btn-op btn-somar">+</button>
+      <button id="btnSubtrair" class="btn-op btn-subtrair">−</button>
+      <button id="btnMultiplicar" class="btn-op btn-multiplicar">×</button>
+    </div>
+
+    <p id="resultado">O resultado aparecerá aqui.</p>
+  </div>
 
   <script src="script.js"></script>
 </body>
